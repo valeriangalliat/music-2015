@@ -21,7 +21,7 @@ Most directories are generated using
 [`youtube-dl`](https://github.com/rg3/youtube-dl/). I've some download
 helpers in `tools/dl` that will convert all videos to Ogg files, and
 dump video informations in a `.info.json` file. Also, if a target file
-is already present, youtube-dl is configured to not download it again.
+is already present, `youtube-dl` is configured to not download it again.
 The only problem with the last point is that it will still download the
 informations page before finding out that it was already downloaded, so
 it takes a little time to incrementally download new stuff.
