@@ -25,3 +25,6 @@ is already present, `youtube-dl` is configured to not download it again.
 The only problem with the last point is that it will still download the
 informations page before finding out that it was already downloaded, so
 it takes a little time to incrementally download new stuff.
+
+[Playlists](playlists)
+----------------------
