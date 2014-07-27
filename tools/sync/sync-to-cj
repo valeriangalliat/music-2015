@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+readonly PROGDIR=$(dirname "$0")
+
+"$PROGDIR/sync" \
+    "$PROGDIR/../../" \
+    cj:music/ \
+    "$@"

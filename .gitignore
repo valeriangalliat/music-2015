@@ -1,0 +1,6 @@
+/database
+*.mp4
+*.mp3
+*.ogg
+*.info.json
+dl.log

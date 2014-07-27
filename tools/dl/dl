@@ -1,0 +1,27 @@
+#!/bin/sh -e
+#
+# All arguments are passed to `youtube-dl`.
+#
+# Do not provide a format "best" or "bestaudio", by default it will take the
+# best of both possible.
+#
+# Also no audio quality is provided, it will preserve the quality of the
+# original format.
+#
+# These settings are currently the best I found for audio extraction quality.
+#
+
+youtube-dl \
+    --ignore-errors \
+    --id \
+    --no-overwrites \
+    --write-info-json \
+    --no-progress \
+    --extract-audio \
+    --audio-format vorbis \
+    --keep-video \
+    --no-post-overwrites \
+    "$@"
+
+# Do not fail
+:

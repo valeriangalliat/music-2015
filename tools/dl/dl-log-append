@@ -1,0 +1,7 @@
+#!/bin/sh -e
+#
+# All arguments are passed to `dl` script, and output streams are redirected
+# into `dl.log` in the current directory.
+#
+
+"$(dirname "$0")/dl" "$@" >> "dl.log" 2>&1

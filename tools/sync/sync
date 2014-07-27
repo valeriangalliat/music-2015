@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+readonly PRODGIR=$(dirname "$0")
+readonly FILTER="$PRODGIR/filter.txt"
+
+rsync \
+    -rv \
+    --delete \
+    --links \
+    --progress \
+    --stats \
+    --human-readable \
+    --filter="merge $FILTER" \
+    --times \
+    --size-only \
+    "$@"
