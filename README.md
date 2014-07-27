@@ -26,5 +26,18 @@ The only problem with the last point is that it will still download the
 informations page before finding out that it was already downloaded, so
 it takes a little time to incrementally download new stuff.
 
-[Playlists](playlists)
-----------------------
+I don't track music and video files directly with Git since it takes
+hundreds gigabytes and I don't believe Git is adapted for this kind
+of storage. I look forward to use the awesome [IPFS](http://ipfs.io/)
+for this when it will be ready! I also thought of BitTorrent, but it's
+not suitable for a directory that changes that often. I'd like something
+like an incremental torrent (what IPFS can shine at) but I don't know
+any solution for this. Please tell me if you known a software or
+protocol that can help! Actually, I'm `rsync`ing everything between my
+computers using [these scripts](tools/sync).
+
+Index
+-----
+
+* [Playlists](playlists)
+* [Tools](tools)
