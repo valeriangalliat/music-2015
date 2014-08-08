@@ -9,11 +9,11 @@
 local=$(find . -name '*.ogg' | wc -l | awk '{print $NF}')
 remote=$(grep 'Downloading video #' dl.log | awk '{print $NF; exit}')
 
-[ "$local" = "$remote" ] && exit
+[ "$local" -ge "$remote" ] && exit
 
 echo "Local: $local" >&2
 echo "Remote: $remote" >&2
 
 echo >&2
 
-grep ERROR dl.log >&2
+grep ERROR dl.log | grep -v 'unable to obtain file audio codec' >&2
