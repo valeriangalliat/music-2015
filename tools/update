@@ -11,6 +11,7 @@
 #     cp codejam/database ~/.config/mpd/database
 #
 
+import io
 import json
 import os
 import sys
@@ -41,7 +42,10 @@ def main():
     dir = '.'
     base = None
 
-    for line in [x.strip() for x in sys.stdin]:
+    stdin = io.TextIOWrapper(sys.stdin.buffer, encoding='utf_8')
+    stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf_8')
+
+    for line in [x.strip() for x in stdin]:
         name, value = deflist(2, line.split(': ', 1))
 
         if name == 'begin':
@@ -55,9 +59,9 @@ def main():
             title = info(file)
 
             if title is not None:
-                print('Title: ', title)
+                stdout.write('Title: ' + title + '\n')
 
-        print(line)
+        stdout.write(line + '\n')
 
 
 if __name__ == '__main__':
