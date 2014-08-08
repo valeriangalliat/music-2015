@@ -36,6 +36,19 @@ any solution for this. Please tell me if you known a software or
 protocol that can help! Actually, I'm `rsync`ing everything between my
 computers using [these scripts](tools/sync).
 
+Checking integrity
+------------------
+
+In a YouTube download directory, to check if all the videos were
+retrieved, run the following:
+
+```sh
+echo 'Number of songs in the directory:'
+find . -name '*.ogg' | wc -l
+echo 'Number of songs in the playlist/channel:'
+grep 'Downloading video #' dl.log | awk '{print $NF; exit}'
+```
+
 Index
 -----
 
