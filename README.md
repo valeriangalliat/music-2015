@@ -49,6 +49,18 @@ echo 'Number of songs in the playlist/channel:'
 grep 'Downloading video #' dl.log | awk '{print $NF; exit}'
 ```
 
+This is automated with the [`youtube-check`](tools/youtube-check)
+tool.
+
+You can also check multiple directory at once with the following:
+
+```sh
+cd funk # Example directory
+
+find . -type d -mindepth 1 -maxdepth 1 \
+    -exec sh -c 'echo "$0"; cd "$0"; ../../tools/youtube-check' {} \;
+```
+
 Index
 -----
 
