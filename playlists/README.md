@@ -1,16 +1,7 @@
 Playlists
 =========
 
-The `all` directory contains playlists for each genre, with a makefile
-to generate them.
+The `all-*.m3u` files contains the whole list of songs for each genre,
+and the makefile is able to generate them dynamically.
 
-This very directory contains custom playlists.
-
-To add a playlist to MPD, run the following:
-
-```sh
-cat playlist.m3u | mpc add
-```
-
-See `mpc add` options to control more precisely where you add the
-playlist in your main playlist.
+Other `*.m3u` files are personal playlists.
