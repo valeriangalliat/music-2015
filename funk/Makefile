@@ -45,9 +45,10 @@ ALL += kool-master-style
 kool-master-style: force
 	$(DL_OVERWRITE) $@ https://www.youtube.com/channel/UC_ohVXXnSJNTfia5zOomaJA
 
-ALL += way-back
-way-back: force
-	$(DL_OVERWRITE) $@ https://www.youtube.com/channel/UCIrC0UFDLZ93zPmkMXKCrsQ
+# Removed from YouTube
+#ALL += way-back
+#way-back: force
+	#$(DL_OVERWRITE) $@ https://www.youtube.com/channel/UCIrC0UFDLZ93zPmkMXKCrsQ
 
 ALL += old-school-chibani
 old-school-chibani: force
