@@ -1,0 +1,19 @@
+#!/bin/sh -e
+#
+# Checks the count of Ogg files in the current directory against
+# the count of items in the `dl.log` file.
+#
+# When not equals, 1 is returned with an error message.
+#
+
+local=$(find . -name '*.ogg' | wc -l | awk '{print $NF}')
+remote=$(grep 'Downloading video #' dl.log | awk '{print $NF; exit}')
+
+[ "$local" = "$remote" ] && exit
+
+echo "Local: $local" >&2
+echo "Remote: $remote" >&2
+
+echo >&2
+
+grep ERROR dl.log >&2

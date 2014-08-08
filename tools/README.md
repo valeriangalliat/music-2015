@@ -28,3 +28,10 @@ in all subdirectories (because MPD wants a `.mpdignore` per directory).
 
 This script will update the MPD database to add music titles from
 `.info.json` files. See the header comment for more.
+
+[`youtube-check`](youtube-check)
+--------------------------------
+
+Checks if the number of Ogg files in the current directory equals
+the total number of items in `dl.log`. Otherwise, print numbers and grep
+for errors.
