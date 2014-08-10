@@ -5,7 +5,6 @@ readonly FILTER="$PRODGIR/filter.txt"
 
 rsync \
     -rv \
-    --delete \
     --links \
     --progress \
     --stats \
