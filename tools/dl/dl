@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh
 #
 # All arguments are passed to `youtube-dl`.
 #
