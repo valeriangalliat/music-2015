@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+
+import glob
+import os
+import yaml
+
+
+def dl(url, append=False):
+    line = '\tcd $@ && $(YOUTUBE_DL) $(YOUTUBE_DL_FLAGS) ' + url + ' '
+    line += '>>' if append else '>'
+    line += ' dl.log 2>&1'
+    return line
+
+
+def process_item(dir, urls, dest):
+    print('ALL += ' + dir, file=dest)
+    print(dir + ': force', file=dest)
+
+    url = urls.pop(0)
+
+    print('\tmkdir -p $@', file=dest)
+    print(dl(url), file=dest)
+
+    if len(urls) == 0:
+        return
+
+    for url in urls:
+        print(dl(url, True), file=dest)
+
+
+def process(root, config, dest):
+    for dir, urls in config.items():
+        if not isinstance(urls, list):
+            urls = [urls]
+
+        if len(urls) == 0:
+            continue
+
+        process_item(root + '/' + dir, urls, dest)
+        print(file=dest)
+
+
+def find(where, what):
+    for root, dirs, files in os.walk(where):
+        for file in files:
+            if file == what:
+                yield root, file
+
+
+def main():
+    os.chdir(os.path.dirname(__file__))
+
+    dest = open('Makefile', 'w')
+    print('.include "config.mk"', file=dest)
+    print(file=dest)
+    print('all: real-all', file=dest)
+    print(file=dest)
+
+    for root, file in find('.', 'music.yaml'):
+        if root[0:2] == './':
+            root = root[2:]
+
+        process(root, yaml.load(open(root + '/' + file, 'r')), dest)
+
+    print('real-all: $(ALL)', file=dest)
+    print(file=dest)
+    print('force:', file=dest)
+
+
+if __name__ == '__main__':
+    main()
