@@ -8,7 +8,7 @@ import yaml
 def dl(url, append=False):
     line = '\tcd $@ && $(YOUTUBE_DL) $(YOUTUBE_DL_FLAGS) ' + url + ' '
     line += '>>' if append else '>'
-    line += ' dl.log 2>&1'
+    line += ' dl.log 2>&1 || :'
     return line
 
 
