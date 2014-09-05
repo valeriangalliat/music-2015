@@ -9,6 +9,14 @@ ALL += brown-priders-old-school-funk
 brown-priders-old-school-funk: force
 	$(DL_OVERWRITE) $@ https://www.youtube.com/user/BrownPriderFunk2/videos
 
+ALL += franck-funk
+franck-funk: force
+	$(DL_OVERWRITE) $@ https://www.youtube.com/user/TheFranckparis/videos
+
+ALL += francois-funk
+francois-funk: force
+	$(DL_OVERWRITE) $@ https://www.youtube.com/channel/UCPr4qDs2ggsT3HuliEz3Byg
+
 ALL += kelly-funk
 kelly-funk: force
 	$(DL_OVERWRITE) $@ https://www.youtube.com/channel/UCtuzWbaytvVQivVPRjPEZuA
