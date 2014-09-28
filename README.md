@@ -46,31 +46,18 @@ videos). This is a problem for large channels where the script will be
 stuck with these videos, without downloading newer ones.
 
 To fix this, I've written a patch for `youtube-dl` that removes the
-sort, falling back to the default of "recent videos first". A good
-workaround for channels with more than 1048 videos is to run the
+sort, falling back to the default of "recent videos first":
+
+```sh
+sed -i 's/&sort=da//g' youtube_dl/extractor/youtube.py
+```
+
+A good workaround for channels with more than 1048 videos is to run the
 download without the patch (to get oldest videos), then with the patch
 (to get newer videos). Though, if the channel has more than 2096 videos,
-I currently don't know any other way to retrieve them missing videos,
-other than contacting the channel author (I believe he have exhaustive
+I currently don't know any way to retrieve them missing videos, other
+than contacting the channel author (I believe they have exhaustive
 pagination in the YouTube admin page).
-
-The patch to get newer videos:
-
-```patch
-diff --git a/youtube_dl/extractor/youtube.py b/youtube_dl/extractor/youtube.py
-index 99198e3..3da7267 100644
---- a/youtube_dl/extractor/youtube.py
-+++ b/youtube_dl/extractor/youtube.py
-@@ -1216,7 +1216,7 @@ class YoutubeChannelIE(InfoExtractor):
-     IE_DESC = 'YouTube.com channels'
-     _VALID_URL = r"^(?:https?://)?(?:youtu\.be|(?:\w+\.)?youtube(?:-nocookie)?\.com)/channel/([0-9A-Za-z_-]+)"
-     _MORE_PAGES_INDICATOR = 'yt-uix-load-more'
--    _MORE_PAGES_URL = 'https://www.youtube.com/c4_browse_ajax?action_load_more_videos=1&flow=list&paging=%s&view=0&sort=da&channel_id=%s'
-+    _MORE_PAGES_URL = 'https://www.youtube.com/c4_browse_ajax?action_load_more_videos=1&flow=list&paging=%s&view=0&channel_id=%s'
-     IE_NAME = 'youtube:channel'
-     _TESTS = [{
-         'note': 'paginated channel',
-```
 
 Checking integrity
 ------------------
