@@ -1,4 +1,3 @@
 + /videos/*.mp4
 - /.git
 - *.mp4
-- /new
