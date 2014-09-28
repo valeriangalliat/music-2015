@@ -36,6 +36,24 @@ any solution for this. Please tell me if you known a software or
 protocol that can help! Actually, I'm `rsync`ing everything between my
 computers using [these scripts](tools/sync).
 
+Handling large channels
+-----------------------
+
+`youtube-dl` channel extractor uses the AJAX pagination from the web
+interface that is limited to 1048 videos. By default, `youtube-dl` asks
+YouTube to sort this pagination by date (thus getting the 1048 oldest
+videos). This is a problem for large channels where the script will be
+stuck with these videos, without downloading newer ones.
+
+To fix this, I've written a patch for `youtube-dl` that removes the
+sort, falling back to the default of "recent videos first". A good
+workaround for channels with more than 1048 videos is to run the
+download without the patch (to get oldest videos), then with the patch
+(to get newer videos). Though, if the channel has more than 2096 videos,
+I currently don't know any other way to retrieve them missing videos,
+other than contacting the channel author (I believe he have exhaustive
+pagination in the YouTube admin page).
+
 Checking integrity
 ------------------
 
