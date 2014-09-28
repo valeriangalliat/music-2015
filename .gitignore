@@ -5,4 +5,5 @@
 *.m4a
 *.info.json
 dl.log
+archive.log
 /new/Makefile
