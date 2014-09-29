@@ -8,7 +8,7 @@ all:
 
 .include "dl.mk"
 
-index:
+index: force
 	tools/index > $@
 
 force:
