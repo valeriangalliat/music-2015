@@ -13,7 +13,7 @@ def dl(url, append=False):
 
 
 def process_item(dir, urls, dest):
-    print('ALL += ' + dir, file=dest)
+    print('DL += ' + dir, file=dest)
     print(dir + ': force', file=dest)
 
     url = urls.pop(0)
@@ -50,10 +50,9 @@ def find(where, what):
 def main():
     os.chdir(os.path.dirname(__file__))
 
-    dest = open('Makefile', 'w')
-    print('.include "config.mk"', file=dest)
-    print(file=dest)
-    print('all: real-all', file=dest)
+    dest = open('dl.mk', 'w')
+
+    print('dl: real-dl', file=dest)
     print(file=dest)
 
     for root, file in find('.', 'music.yaml'):
@@ -62,7 +61,7 @@ def main():
 
         process(root, yaml.load(open(root + '/' + file, 'r')), dest)
 
-    print('real-all: $(ALL)', file=dest)
+    print('real-dl: $(DL)', file=dest)
     print(file=dest)
     print('force:', file=dest)
 

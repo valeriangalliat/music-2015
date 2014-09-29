@@ -1,5 +1,5 @@
-/Makefile
 /database
+/dl.mk
 dl.log
 archive.log
 *.mp4
