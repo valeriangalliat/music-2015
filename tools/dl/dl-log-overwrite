@@ -1,7 +1,0 @@
-#!/bin/sh -e
-#
-# Proxy to `dl-log-append` but empty the log file before.
-#
-
-> dl.log
-"$(dirname "$0")/dl-log-append" "$@"
