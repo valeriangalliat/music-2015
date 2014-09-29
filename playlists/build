@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+cd "$(dirname "$0")"
+
+find .. -maxdepth 2 -name 'music.yaml' \
+    | xargs dirname \
+    | sed 's/^...//' \
+    | while read dir; do
+    grep "./$dir/" ../index \
+        | sed 's/^./codejam/' \
+        | sed 's/: .*//' \
+        > "all-${dir}.m3u"
+done
