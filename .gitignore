@@ -1,9 +1,9 @@
+/Makefile
 /database
+dl.log
+archive.log
 *.mp4
 *.mp3
 *.ogg
 *.m4a
 *.info.json
-dl.log
-archive.log
-/new/Makefile
