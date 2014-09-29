@@ -9,22 +9,29 @@ Description
 This repository contains my whole music directory, including scripts to
 download everything from YouTube and other sites.
 
-YouTube is always deleting videos [due to
-copyright](http://ploum.net/im-a-pirate/), so the scripts will probably
-not retrieve everything. You can see errors from `dl.log` in folders
-downloaded from YouTube channels or playlists. You can ask me for a
-guest SSH access if you want to `rsync` the complete folder, but it will
-be way slower than YouTube, so it's best to download the most from
-YouTube at first.
+YouTube is always deleting videos [due to copyright], so the scripts
+will probably not retrieve everything. You can see errors from `dl.log`
+in folders downloaded from YouTube channels or playlists. You can ask me
+for a guest SSH access if you want to `rsync` the complete folder, but
+it will be way slower than YouTube, so it's best to download the most
+from YouTube at first.
 
-Most directories are generated using
-[`youtube-dl`](https://github.com/rg3/youtube-dl/). I've some download
-helpers in `tools/dl` that will convert all videos to Ogg files, and
-dump video informations in a `.info.json` file. Also, if a target file
-is already present, `youtube-dl` is configured to not download it again.
-The only problem with the last point is that it will still download the
-informations page before finding out that it was already downloaded, so
-it takes a little time to incrementally download new stuff.
+[due to copyright]: http://ploum.net/im-a-pirate/
+
+Most directories are generated using [`youtube-dl`]. Basically, the
+`configure` script generates a `dl.mk` from all the `music.yaml` files
+it finds, which is included by the makefile to download songs from
+YouTube channels or playlists. The `youtube-dl` settings can be found
+in `config.mk`.
+
+[`youtube-dl`]: https://github.com/rg3/youtube-dl/
+
+Basically, every song is downloaded with its YouTube ID as filename,
+along with a `.info.json` file containing the YouTube metadata.
+
+An `archive.log` is maintained in each directory by `youtube-dl` to
+avoid downloading multiple times the same songs, and the output is
+redirected to `dl.log`.
 
 I don't track music and video files directly with Git since it takes
 hundreds gigabytes and I don't believe Git is adapted for this kind
@@ -58,31 +65,6 @@ download without the patch (to get oldest videos), then with the patch
 I currently don't know any way to retrieve them missing videos, other
 than contacting the channel author (I believe they have exhaustive
 pagination in the YouTube admin page).
-
-Checking integrity
-------------------
-
-In a YouTube download directory, to check if all the videos were
-retrieved, run the following:
-
-```sh
-echo 'Number of songs in the directory:'
-find . -name '*.ogg' | wc -l
-echo 'Number of songs in the playlist/channel:'
-grep 'Downloading video #' dl.log | awk '{print $NF; exit}'
-```
-
-This is automated with the [`youtube-check`](tools/youtube-check)
-tool.
-
-You can also check multiple directory at once with the following:
-
-```sh
-cd funk # Example directory
-
-find . -type d -mindepth 1 -maxdepth 1 \
-    -exec sh -c 'echo "$0"; cd "$0"; ../../tools/youtube-check' {} \;
-```
 
 Index
 -----
