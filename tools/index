@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+
+import json
+import os.path
+import subprocess
+import sys
+
+command = 'find . -name *.m4a -or -name *.ogg -or -name *.mp3'
+p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+
+for line in p.stdout:
+    file = line.decode('utf_8').strip()
+    base = os.path.splitext(file)[0]
+    info = base + '.info.json'
+
+    print(file + ': ' + json.load(open(info))['title'])
