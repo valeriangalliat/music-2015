@@ -52,18 +52,13 @@ def main():
 
     dest = open('dl.mk', 'w')
 
-    print('dl: real-dl', file=dest)
-    print(file=dest)
-
     for root, file in find('.', 'music.yaml'):
         if root[0:2] == './':
             root = root[2:]
 
         process(root, yaml.load(open(root + '/' + file, 'r')), dest)
 
-    print('real-dl: $(DL)', file=dest)
-    print(file=dest)
-    print('force:', file=dest)
+    print('dl: $(DL)', file=dest)
 
 
 if __name__ == '__main__':

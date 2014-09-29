@@ -10,3 +10,5 @@ all:
 
 index:
 	tools/index > $@
+
+force:
