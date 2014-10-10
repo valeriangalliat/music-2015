@@ -14,38 +14,9 @@ import subprocess
 import sys
 
 
-def duration(file):
-    args = ['ffprobe', '-show_format', '-v', 'quiet', file]
-
-    p = subprocess.Popen(args, stdout=subprocess.PIPE,
-                         universal_newlines=True)
-
-    time = None
-
-    for line in p.stdout:
-        try:
-            k, v = line.strip().split('=')
-        except:
-            continue
-
-        if k == 'duration':
-            time = int(float(v))
-            break
-
-    code = p.wait()
-
-    if code != 0:
-        raise subprocess.CalledProcessError(code)
-
-    if time is None:
-        raise Exception('`duration` not found')
-
-    return time
-
-
-def title(file):
+def info(file):
     info = os.path.splitext(file)[0] + '.info.json'
-    return json.load(open(info))['title']
+    return json.load(open(info))
 
 
 def walk(dir, root=None):
@@ -69,18 +40,13 @@ def walk(dir, root=None):
             continue
 
         try:
-            time = duration(file)
+            i = info(file)
         except:
             continue
 
         print('song_begin:', os.path.basename(file))
-        print('Time:', time)
-
-        try:
-            print('Title:', title(file))
-        except:
-            pass
-
+        print('Time:', i['duration'])
+        print('Title:', i['title'])
         print('mtime:', int(os.path.getmtime(file)))
         print('song_end')
 
