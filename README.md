@@ -43,6 +43,23 @@ any solution for this. Please tell me if you known a software or
 protocol that can help! Actually, I'm `rsync`ing everything between my
 computers using [these scripts](tools/sync).
 
+Although, I'm tracking an `index` file which contains the path and song
+title for every single music in this directory.
+
+Building
+--------
+
+Everything is in the makefile:
+
+<!-- BEGIN TASKS -->
+| Task | Description |
+| ---- | ----------- |
+| `make dl` |  Download the musics. |
+| `make index` |  Build the musics index. |
+| `make database` |  Build the MPD database. |
+| `make playlists` |  Build the dynamic playlists. |
+<!-- END TASKS -->
+
 Handling large channels
 -----------------------
 
