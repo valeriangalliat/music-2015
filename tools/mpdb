@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-'''Usage: mpdpg [options] [<dir>]
+'''Usage: mpdb [<dir>]
 
 Arguments:
   <dir>  Music directory [default: .].
