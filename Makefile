@@ -19,4 +19,10 @@ database: force
 playlists: force
 	playlists/build
 
+readme: README.md
+
+README.md: force
+	cat $@ | tools/process-readme > $@.new
+	mv $@.new $@
+
 force:

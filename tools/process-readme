@@ -1,0 +1,15 @@
+#!/usr/bin/awk -f
+
+/<!-- BEGIN TASKS -->/ {
+    print
+    print "| Task | Description |"
+    print "| ---- | ----------- |"
+    system("make | sed '1,2d;s/^/| /;s/:/ | /;s/$/ |/'")
+    silent=1
+}
+
+/<!-- END TASKS -->/ {
+    silent=0
+}
+
+!silent
