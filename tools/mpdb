@@ -56,11 +56,14 @@ def main():
     dir = os.path.realpath(args['<dir>'] or '.')
 
     print('info_begin')
-    print('format: 1')
+    print('format: 2')
+    print('mpd_version: 0.19')
     print('fs_charset: UTF-8')
+
     print('tag: Artist')
     print('tag: ArtistSort')
     print('tag: Album')
+    print('tag: AlbumSort')
     print('tag: AlbumArtist')
     print('tag: AlbumArtistSort')
     print('tag: Title')
@@ -75,6 +78,8 @@ def main():
     print('tag: MUSICBRAINZ_ALBUMID')
     print('tag: MUSICBRAINZ_ALBUMARTISTID')
     print('tag: MUSICBRAINZ_TRACKID')
+    print('tag: MUSICBRAINZ_RELEASETRACKID')
+
     print('info_end')
 
     walk(dir)
