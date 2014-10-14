@@ -14,7 +14,7 @@ index: force
 	tools/index > $@
 
 database: force
-	tools/mpdb > $@
+	tools/mpdb | tools/cjdb > $@
 
 playlists: force
 	playlists/build

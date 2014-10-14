@@ -1,0 +1,16 @@
+#!/usr/bin/awk -f
+
+$1 == "begin:" {
+    $2 = "codejam/" $2
+}
+
+1
+
+/^info_end$/ {
+    print "directory: codejam"
+    print "begin: codejam"
+}
+
+END {
+    print "end: codejam"
+}
