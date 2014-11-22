@@ -1,12 +1,13 @@
 .include "config.mk"
 
-all:
-	@echo 'There'\''s no `all` target.'
-	@echo
+default:
+	@echo '`make all`: Do all the below.'
 	@echo '`make dl`: Download the musics.'
 	@echo '`make index`: Build the musics index.'
 	@echo '`make database`: Build the MPD database.'
 	@echo '`make playlists`: Build the dynamic playlists.'
+
+all: dl index database playlists
 
 .include "dl.mk"
 
