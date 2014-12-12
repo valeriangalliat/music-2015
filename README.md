@@ -1,7 +1,7 @@
 Music
 =====
 
-My personal music directory.
+> My personal music directory.
 
 Description
 -----------
@@ -18,18 +18,18 @@ from YouTube at first.
 
 [due to copyright]: http://ploum.net/im-a-pirate/
 
-Most directories are generated using [`youtube-dl`]. Basically, the
+Most directories are generated using [youtube-dl]. Basically, the
 `configure` script generates a `dl.mk` from all the `music.yaml` files
 it finds, which is included by the makefile to download songs from
-YouTube channels or playlists. The `youtube-dl` settings can be found
+YouTube channels or playlists. The youtube-dl settings can be found
 in `config.mk`.
 
-[`youtube-dl`]: https://github.com/rg3/youtube-dl/
+[youtube-dl]: https://github.com/rg3/youtube-dl/
 
 Basically, every song is downloaded with its YouTube ID as filename,
 along with a `.info.json` file containing the YouTube metadata.
 
-An `archive.log` is maintained in each directory by `youtube-dl` to
+An `archive.log` is maintained in each directory by youtube-dl to
 avoid downloading multiple times the same songs, and the output is
 redirected to `dl.log`.
 
@@ -54,22 +54,24 @@ Everything is in the makefile:
 <!-- BEGIN TASKS -->
 | Task | Description |
 | ---- | ----------- |
+| `make all` |  Do all the below. |
 | `make dl` |  Download the musics. |
 | `make index` |  Build the musics index. |
 | `make database` |  Build the MPD database. |
 | `make playlists` |  Build the dynamic playlists. |
+| `make readme` |  Update readme tasks table. |
 <!-- END TASKS -->
 
 Handling large channels
 -----------------------
 
-`youtube-dl` channel extractor uses the AJAX pagination from the web
-interface that is limited to 1048 videos. By default, `youtube-dl` asks
+youtube-dl channel extractor uses the AJAX pagination from the web
+interface that is limited to 1048 videos. By default, youtube-dl asks
 YouTube to sort this pagination by date (thus getting the 1048 oldest
 videos). This is a problem for large channels where the script will be
 stuck with these videos, without downloading newer ones.
 
-To fix this, I've written a patch for `youtube-dl` that removes the
+To fix this, I've written a patch for youtube-dl that removes the
 sort, falling back to the default of "recent videos first":
 
 ```sh

@@ -6,6 +6,7 @@ default:
 	@echo '`make index`: Build the musics index.'
 	@echo '`make database`: Build the MPD database.'
 	@echo '`make playlists`: Build the dynamic playlists.'
+	@echo '`make readme`: Update readme tasks table.'
 
 all: dl index database playlists
 

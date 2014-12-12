@@ -4,7 +4,7 @@
     print
     print "| Task | Description |"
     print "| ---- | ----------- |"
-    system("make | sed '1,2d;s/^/| /;s/:/ | /;s/$/ |/'")
+    system("make | sed 's/^/| /;s/:/ | /;s/$/ |/'")
     silent=1
 }
 
