@@ -36,3 +36,8 @@ Dynamically fill the tasks table from stdin readme.
 
 This are the scripts I use to rsync the whole music directory between
 my computers.
+
+[car](car)
+----------
+
+A Rakefile to deploy playlists I listen in my car.

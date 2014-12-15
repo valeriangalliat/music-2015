@@ -1,0 +1,101 @@
+require 'json'
+
+# Environment {{{
+# ===============
+
+DESTDIR = ENV['DESTDIR']
+
+if not ENV['DESTDIR']
+  STDERR.puts "Usage: rake DESTDIR=/path/to/usb"
+  exit 1
+end
+
+MUSIC = '../..'
+PLAYLISTS = "#{MUSIC}/playlists"
+
+FFMPEG_FLAGS = '-loglevel quiet'
+
+FILES = []
+
+# }}}
+
+# Classes {{{
+# ===========
+
+class String
+  def slugify
+    downcase.strip.gsub(/[^\w]/, ' ').gsub(/ +/, '-').sub(/-$/, '')
+  end
+end
+
+class Playlist
+  include Rake::DSL
+
+  def initialize(name, dir=name)
+    @name = name
+    @dir = dir
+  end
+
+  def define_tasks
+    musics do |music|
+      slug = info(music)['title'].slugify
+      target = "#{dest}/#{slug}.mp3"
+
+      FILES << target
+
+      file target => [music, dest] do |t|
+        puts "#{@dir}/#{slug}.mp3"
+        `ffmpeg #{FFMPEG_FLAGS} -i #{music} #{t}.part.mp3`
+        `mv #{t}.part.mp3 #{t}`
+      end
+
+      directory dest => [DESTDIR]
+    end
+  end
+
+  def playlist
+    "#{PLAYLISTS}/#{@name}.m3u"
+  end
+
+  def dest
+    "#{DESTDIR}/#{@dir}"
+  end
+
+  def musics
+    File.foreach(playlist) do |line|
+      line.gsub!(/^[^\/]*\//, '').gsub!(/\n$/, '')
+      yield "#{MUSIC}/#{line}"
+    end
+  end
+
+  def info(music)
+    JSON.parse(File.read(music.sub(/\.[^\.]*$/, '.info.json')))
+  end
+end
+
+# }}}
+
+# Functions {{{
+# =============
+
+def p(*args)
+  Playlist.new(*args).define_tasks
+end
+
+# }}}
+
+#
+# Playlists to deploy.
+#
+# Second argument is the destination directory name (in case you want
+# anoyther name as the playlist name).
+#
+p 'drive'
+# p 'electro'
+# p 'funk'
+# p 'all-rock' 'rock'
+# p 'all-reggae' 'reggae'
+
+task :default => [:install]
+task :install => FILES
+directory DESTDIR
