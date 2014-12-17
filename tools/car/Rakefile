@@ -24,7 +24,11 @@ FILES = []
 
 class String
   def slugify
-    downcase.strip.gsub(/[^\w]/, ' ').gsub(/ +/, '-').sub(/-$/, '')
+    downcase.strip
+      .gsub(/[^\w]/, ' ')
+      .gsub(/ +/, '-')
+      .sub(/^-/, '')
+      .sub(/-$/, '')
   end
 end
 
