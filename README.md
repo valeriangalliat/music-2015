@@ -62,29 +62,6 @@ Everything is in the makefile:
 | `make readme` |  Update readme tasks table. |
 <!-- END TASKS -->
 
-Handling large channels
------------------------
-
-youtube-dl channel extractor uses the AJAX pagination from the web
-interface that is limited to 1048 videos. By default, youtube-dl asks
-YouTube to sort this pagination by date (thus getting the 1048 oldest
-videos). This is a problem for large channels where the script will be
-stuck with these videos, without downloading newer ones.
-
-To fix this, I've written a patch for youtube-dl that removes the
-sort, falling back to the default of "recent videos first":
-
-```sh
-sed -i 's/&sort=da//g' youtube_dl/extractor/youtube.py
-```
-
-A good workaround for channels with more than 1048 videos is to run the
-download without the patch (to get oldest videos), then with the patch
-(to get newer videos). Though, if the channel has more than 2096 videos,
-I currently don't know any way to retrieve them missing videos, other
-than contacting the channel author (I believe they have exhaustive
-pagination in the YouTube admin page).
-
 Index
 -----
 

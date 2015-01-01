@@ -1,4 +1,4 @@
-YOUTUBE_DL = ~/opt/youtube-dl/youtube_dl/__main__.py
+YOUTUBE_DL = youtube-dl
 
 YOUTUBE_DL_FLAGS += --extract-audio
 YOUTUBE_DL_FLAGS += --id
