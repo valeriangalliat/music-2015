@@ -49,7 +49,7 @@ Build the [MPD] database from all the files having a corresponding
 
 Prefix all directories from MPD playlist in stdin with `codejam/`.
 
-[cjdb](cjdb)
+[oldb](oldb)
 ------------
 
 Convert stdin MPD database to old format (for Debian Wheezy MPD
