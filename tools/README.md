@@ -63,7 +63,7 @@ Dynamically fill the tasks table from stdin readme.
 [sync](sync)
 ------------
 
-This are the scripts I use to rsync the whole music directory between
+This are the scripts I use to `rsync` the whole music directory between
 my computers.
 
 [car](car)
