@@ -1,0 +1,34 @@
+#!/bin/sh -e
+
+#
+# MPlayer can't stream HTTPS, need to curl the stream and pipe it;
+#
+# To keep MPlayer input, the video stream from stdin is redirected to
+# descriptor 3 (`3<&0`) and we tell MPlayer to read from `/dev/fd/3`. Then we
+# can pipe `/dev/tty` back into stdin.
+#
+play() {
+    curl -s "$1" | mplayer \
+        -vo null \
+        -msglevel all=0:statusline=5 \
+        /dev/fd/3 3<&0 < /dev/tty 2> /dev/null
+}
+
+title() {
+    printf '%s' "$1" | python -c 'import sys, json; print(json.load(sys.stdin)["title"])'
+}
+
+url() {
+    printf '%s' "$1" | python -c 'import sys, json; print(json.load(sys.stdin)["url"])'
+}
+
+go() {
+    if json=$(youtube-dl -j "$song"); then
+        title "$json"
+        play $(url "$json") || :
+    fi
+}
+
+awk -F/ '{print $NF}' \
+    | sed 's,^,http://youtube.com/watch?v=,;s,....$,,' \
+    | while read song; do go "$song"; done

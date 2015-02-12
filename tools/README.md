@@ -1,6 +1,35 @@
 Tools
 =====
 
+[play](play)
+------------
+
+Remotely play a [playlist](../playlists) from YouTube with MPlayer.
+[youtube-dl] is needed to get stream from YouTube.
+
+[youtube-dl]: https://github.com/rg3/youtube-dl/
+
+Play 42 songs from shuffled funk playlist:
+
+```sh
+cat ../playlists/funk.m3u \
+    | shuf \
+    | head -42 \
+    | ./play
+```
+
+Use playlist from GitHub:
+
+```sh
+curl -s https://raw.githubusercontent.com/valeriangalliat/music/master/playlists/funk.m3u \
+    | shuf \
+    | ./play
+```
+
+Note videos are regularly deleted from YouTube, so they won't all be
+available. I need to setup a mirror from my server to fallback when
+a video was censored.
+
 [index](index)
 --------------
 
