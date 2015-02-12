@@ -8,7 +8,7 @@
 # can pipe `/dev/tty` back into stdin.
 #
 play() {
-    curl -s "$1" | mplayer \
+    curl -s --location "$1" | mplayer \
         -vo null \
         -msglevel all=0:statusline=5 \
         /dev/fd/3 3<&0 < /dev/tty 2> /dev/null
