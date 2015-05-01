@@ -16,6 +16,7 @@ PLAYLISTS = "#{MUSIC}/playlists"
 FFMPEG_FLAGS = '-loglevel quiet'
 
 FILES = []
+RM = []
 
 # }}}
 
@@ -54,6 +55,14 @@ class Playlist
       end
 
       directory dest => [DESTDIR]
+    end
+
+    Dir.foreach(dest) do |file|
+      file = "#{dest}/#{file}"
+
+      if File.file? file then
+        RM << file if not FILES.include? file
+      end
     end
   end
 
@@ -100,6 +109,14 @@ p 'drive'
 # p 'all-rock' 'rock'
 # p 'all-reggae' 'reggae'
 
-task :default => [:install]
+task :default => [:install, :clean]
 task :install => FILES
+
+task :clean do
+  RM.each do |f|
+    puts "rm #{f}"
+    File.delete f
+  end
+end
+
 directory DESTDIR
