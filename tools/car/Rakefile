@@ -57,11 +57,13 @@ class Playlist
       directory dest => [DESTDIR]
     end
 
-    Dir.foreach(dest) do |file|
-      file = "#{dest}/#{file}"
+    if Dir.exist?(dest) then
+      Dir.foreach(dest) do |file|
+        file = "#{dest}/#{file}"
 
-      if File.file? file then
-        RM << file if not FILES.include? file
+        if File.file? file then
+          RM << file if not FILES.include? file
+        end
       end
     end
   end
