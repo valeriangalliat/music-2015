@@ -105,11 +105,14 @@ end
 # Second argument is the destination directory name (in case you want
 # anoyther name as the playlist name).
 #
+p 'all-electro', 'electro'
 p 'drive'
-# p 'electro'
-# p 'funk'
-# p 'all-rock' 'rock'
-# p 'all-reggae' 'reggae'
+p 'funk'
+p 'funk-calm'
+p 'neogeofanatic'
+p 'rap'
+p 'all-rock', 'rock'
+p 'all-rock-n-roll', 'rock-n-roll'
 
 task :default => [:install, :clean]
 task :install => FILES
