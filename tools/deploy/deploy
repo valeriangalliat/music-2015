@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+
+var _ = require('highland')
+var fs = require('fs-extra')
+var path = require('path')
+var sanitize = require('sanitize-filename')
+
+function info (file) {
+  return file
+    .replace(/\.[^\.]*$/, '.info.json')
+}
+
+function absolute (file) {
+  return __dirname + '/../../' + file.replace(/[^\/]*\//, '')
+}
+
+var readFile = _.wrapCallback(fs.readFile)
+var copy = _.wrapCallback(fs.copy)
+
+var dest = process.argv[2]
+
+var musics = _(process.stdin)
+  .split()
+  .filter(function (line) { return line }) // Skip empty lines
+  .map(absolute)
+  .map(path.resolve)
+
+var titles = musics.fork()
+  .map(info)
+  .flatMap(readFile)
+  .map(JSON.parse)
+  .pluck('title')
+  .map(sanitize)
+  .map(function (title) { return title.replace(/ +/, ' ') })
+
+musics.fork().zip(titles)
+  .flatMap(function (item) {
+    var file = item[0]
+    var title = item[1]
+
+    return copy(file, dest + '/' + title + path.extname(file))
+      .map(function () { return item })
+  })
+  .map(function (item) {
+    return '✓ ' + item[1] + '\n'
+  })
+  .pipe(process.stdout)
